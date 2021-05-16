@@ -50,6 +50,8 @@ if platform.system() == "Darwin":
 if arch == "aarch64" and TICI:
   arch = "larch64"
 
+PC = arch not in ["aarch64", "larch64"]
+
 USE_WEBCAM = os.getenv("USE_WEBCAM") is not None
 QCOM_REPLAY = arch == "aarch64" and os.getenv("QCOM_REPLAY") is not None
 
@@ -223,9 +225,9 @@ if GetOption('compile_db'):
   env.CompilationDatabase('compile_commands.json')
 
 if os.environ.get('SCONS_CACHE'):
-  cache_dir = '/tmp/scons_cache'
-  if TICI:
-    cache_dir = '/data/scons_cache'
+  cache_dir = '/data/scons_cache'
+  if PC:
+    cache_dir = '/tmp/scons_cache'
 
   if QCOM_REPLAY:
     cache_dir = '/tmp/scons_cache_qcom_replay'

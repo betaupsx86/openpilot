@@ -75,6 +75,9 @@ function two_init {
   # disable bluetooth
   service call bluetooth_manager 8
 
+  # clear old scons cache dir
+  rm -rf /tmp/scons_cache
+
   # Check for NEOS update
   if [ $(< /VERSION) != "$REQUIRED_NEOS_VERSION" ]; then
     if [ -f "$DIR/scripts/continue.sh" ]; then
